@@ -1,4 +1,4 @@
-package com.christianjandl.phototask.customlistviewvolley.app;
+package com.christianjandl.phototask.phototask.app;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -8,7 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import info.androidhive.customlistviewvolley.util.LruBitmapCache;
+import com.christianjandl.phototask.phototask.util.LruBitmapCache;
 
 public class AppController extends Application {
 

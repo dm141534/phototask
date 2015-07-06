@@ -1,4 +1,4 @@
-package com.christianjandl.phototask.customlistviewvolley.util;
+package com.christianjandl.phototask.phototask.util;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

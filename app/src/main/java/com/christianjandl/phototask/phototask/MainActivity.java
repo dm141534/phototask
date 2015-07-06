@@ -1,4 +1,4 @@
-package com.christianjandl.phototask.customlistviewvolley;
+package com.christianjandl.phototask.phototask;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,18 +21,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.androidhive.customlistviewvolley.adater.CustomListAdapter;
-import info.androidhive.customlistviewvolley.app.AppController;
-import info.androidhive.customlistviewvolley.model.Movie;
+import com.christianjandl.phototask.R;
+import com.christianjandl.phototask.phototask.adater.CustomListAdapter;
+import com.christianjandl.phototask.phototask.app.AppController;
+import com.christianjandl.phototask.phototask.model.Task;
 
 public class MainActivity extends Activity {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
 
 	// Movies json url
-	private static final String url = "http://api.androidhive.info/json/movies.json";
+	private static final String url = "http://dm141534.students.fhstp.ac.at";
 	private ProgressDialog pDialog;
-	private List<Movie> movieList = new ArrayList<Movie>();
+	private List<Task> taskList = new ArrayList<Task>();
 	private ListView listView;
 	private CustomListAdapter adapter;
 
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		listView = (ListView) findViewById(R.id.list);
-		adapter = new CustomListAdapter(this, movieList);
+		adapter = new CustomListAdapter(this, taskList);
 		listView.setAdapter(adapter);
 
 		pDialog = new ProgressDialog(this);
@@ -67,12 +68,12 @@ public class MainActivity extends Activity {
 							try {
 
 								JSONObject obj = response.getJSONObject(i);
-								Movie movie = new Movie();
-								movie.setTitle(obj.getString("title"));
-								movie.setThumbnailUrl(obj.getString("image"));
-								movie.setRating(((Number) obj.get("rating"))
-										.doubleValue());
-								movie.setYear(obj.getInt("releaseYear"));
+								Task task = new Task();
+								task.setName(obj.getString("name"));
+								task.setPlate(obj.getString("plate"));
+								task.setStaff(obj.getString("staff"));
+
+								task.setDate(obj.getInt("date"));
 
 								// Genre is json array
 								JSONArray genreArry = obj.getJSONArray("genre");
@@ -80,10 +81,10 @@ public class MainActivity extends Activity {
 								for (int j = 0; j < genreArry.length(); j++) {
 									genre.add((String) genreArry.get(j));
 								}
-								movie.setGenre(genre);
+								task.setGenre(genre);
 
 								// adding movie to movies array
-								movieList.add(movie);
+								taskList.add(task);
 
 							} catch (JSONException e) {
 								e.printStackTrace();

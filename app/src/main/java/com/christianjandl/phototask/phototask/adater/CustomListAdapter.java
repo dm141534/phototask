@@ -1,4 +1,4 @@
-package com.christianjandl.phototask.customlistviewvolley.adater;
+package com.christianjandl.phototask.phototask.adater;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,29 +13,29 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
-import info.androidhive.customlistviewvolley.R;
-import info.androidhive.customlistviewvolley.app.AppController;
-import info.androidhive.customlistviewvolley.model.Movie;
+import com.christianjandl.phototask.R;
+import com.christianjandl.phototask.phototask.app.AppController;
+import com.christianjandl.phototask.phototask.model.Task;
 
 public class CustomListAdapter extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater inflater;
-	private List<Movie> movieItems;
+	private List<Task> taskItems;
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-	public CustomListAdapter(Activity activity, List<Movie> movieItems) {
+	public CustomListAdapter(Activity activity, List<Task> taskItems) {
 		this.activity = activity;
-		this.movieItems = movieItems;
+		this.taskItems = taskItems;
 	}
 
 	@Override
 	public int getCount() {
-		return movieItems.size();
+		return taskItems.size();
 	}
 
 	@Override
 	public Object getItem(int location) {
-		return movieItems.get(location);
+		return taskItems.get(location);
 	}
 
 	@Override
@@ -56,34 +56,30 @@ public class CustomListAdapter extends BaseAdapter {
 			imageLoader = AppController.getInstance().getImageLoader();
 		NetworkImageView thumbNail = (NetworkImageView) convertView
 				.findViewById(R.id.thumbnail);
-		TextView title = (TextView) convertView.findViewById(R.id.title);
-		TextView rating = (TextView) convertView.findViewById(R.id.rating);
-		TextView genre = (TextView) convertView.findViewById(R.id.genre);
-		TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+		TextView name = (TextView) convertView.findViewById(R.id.title);
+		TextView plate = (TextView) convertView.findViewById(R.id.rating);
+		TextView date = (TextView) convertView.findViewById(R.id.genre);
+		TextView staff = (TextView) convertView.findViewById(R.id.releaseYear);
+		//TextView jobnumber = (TextView) convertView.findViewById(R.id.jobnumber);
 
-		// getting movie data for the row
-		Movie m = movieItems.get(position);
+
+		// getting Task data for the row
+		Task m = taskItems.get(position);
 
 		// thumbnail image
-		thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+		//thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 		
-		// title
-		title.setText(m.getTitle());
+		// Name
+		name.setText(m.getName());
 		
-		// rating
-		rating.setText("Rating: " + String.valueOf(m.getRating()));
+		// plate
+		plate.setText("Rating: " + String.valueOf(m.getPlate()));
 		
-		// genre
-		String genreStr = "";
-		for (String str : m.getGenre()) {
-			genreStr += str + ", ";
-		}
-		genreStr = genreStr.length() > 0 ? genreStr.substring(0,
-				genreStr.length() - 2) : genreStr;
-		genre.setText(genreStr);
+		// jobnumber
+		//jobnumber.setText(String.valueOf(m.getJobnumber()));
 		
 		// release year
-		year.setText(String.valueOf(m.getYear()));
+		staff.setText(String.valueOf(m.getDate()));
 
 		return convertView;
 	}
