@@ -56,11 +56,11 @@ public class CustomListAdapter extends BaseAdapter {
 			imageLoader = AppController.getInstance().getImageLoader();
 		NetworkImageView thumbNail = (NetworkImageView) convertView
 				.findViewById(R.id.thumbnail);
-		TextView name = (TextView) convertView.findViewById(R.id.title);
-		TextView plate = (TextView) convertView.findViewById(R.id.rating);
-		TextView date = (TextView) convertView.findViewById(R.id.genre);
-		TextView staff = (TextView) convertView.findViewById(R.id.releaseYear);
-		//TextView jobnumber = (TextView) convertView.findViewById(R.id.jobnumber);
+		TextView name = (TextView) convertView.findViewById(R.id.name);
+		TextView plate = (TextView) convertView.findViewById(R.id.plate);
+		TextView date = (TextView) convertView.findViewById(R.id.date);
+		//TextView staff = (TextView) convertView.findViewById(R.id.staff);
+		TextView jobnumber = (TextView) convertView.findViewById(R.id.jobnumber);
 
 
 		// getting Task data for the row
@@ -73,13 +73,13 @@ public class CustomListAdapter extends BaseAdapter {
 		name.setText(m.getName());
 		
 		// plate
-		plate.setText("Rating: " + String.valueOf(m.getPlate()));
+		plate.setText("Kennz: " + String.valueOf(m.getPlate()));
 		
 		// jobnumber
 		//jobnumber.setText(String.valueOf(m.getJobnumber()));
 		
 		// release year
-		staff.setText(String.valueOf(m.getDate()));
+		//staff.setText(String.valueOf(m.getDate()));
 
 		return convertView;
 	}

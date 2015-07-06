@@ -24,6 +24,7 @@ import java.util.List;
 import com.christianjandl.phototask.R;
 import com.christianjandl.phototask.phototask.adater.CustomListAdapter;
 import com.christianjandl.phototask.phototask.app.AppController;
+import com.christianjandl.phototask.phototask.model.Picture;
 import com.christianjandl.phototask.phototask.model.Task;
 
 public class MainActivity extends Activity {
@@ -31,7 +32,7 @@ public class MainActivity extends Activity {
 	private static final String TAG = MainActivity.class.getSimpleName();
 
 	// Movies json url
-	private static final String url = "http://dm141534.students.fhstp.ac.at";
+	private static final String url = "http://dm141534.students.fhstp.ac.at/phototask_api/api/tasks";
 	private ProgressDialog pDialog;
 	private List<Task> taskList = new ArrayList<Task>();
 	private ListView listView;
@@ -52,8 +53,8 @@ public class MainActivity extends Activity {
 		pDialog.show();
 
 		// changing action bar color
-		getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.parseColor("#1b1b1b")));
+	//	getActionBar().setBackgroundDrawable(
+			//	new ColorDrawable(Color.parseColor("#1b1b1b")));
 
 		// Creating volley request obj
 		JsonArrayRequest movieReq = new JsonArrayRequest(url,
@@ -69,21 +70,23 @@ public class MainActivity extends Activity {
 
 								JSONObject obj = response.getJSONObject(i);
 								Task task = new Task();
+
 								task.setName(obj.getString("name"));
 								task.setPlate(obj.getString("plate"));
 								task.setStaff(obj.getString("staff"));
-
+								task.setJobnumber(obj.getString("jobnumber"));
+								task.setId(obj.getString("id"));
 								task.setDate(obj.getInt("date"));
 
 								// Genre is json array
-								JSONArray genreArry = obj.getJSONArray("genre");
-								ArrayList<String> genre = new ArrayList<String>();
-								for (int j = 0; j < genreArry.length(); j++) {
-									genre.add((String) genreArry.get(j));
+								JSONArray pictureArray = obj.getJSONArray("pictures");
+								ArrayList<Picture>  pictures = new ArrayList<Picture>();
+								for (int j = 0; j < pictureArray.length(); j++) {
+									//pictures.add((String) pictureArray.get(j));
 								}
-								task.setGenre(genre);
+								task.setPictures(pictures);
 
-								// adding movie to movies array
+								// adding task to tasks array
 								taskList.add(task);
 
 							} catch (JSONException e) {

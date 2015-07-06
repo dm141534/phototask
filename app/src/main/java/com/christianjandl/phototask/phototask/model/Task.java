@@ -6,9 +6,8 @@ import com.christianjandl.phototask.phototask.model.Picture;
 
 public class Task {
 
-	private String name, plate, staff;
-
-	private int id, date, jobnumber;
+	private String name, plate, staff, jobnumber, id;
+	private int date;
 
 	private ArrayList<Picture> pictures;
 	private ArrayList<Log> logs;
@@ -16,7 +15,9 @@ public class Task {
 	public Task() {
 	}
 
-	private Task(String name, String plate, String staff, int id, int date, int jobnumber, ArrayList<Picture> pictures, ArrayList<Log>logs) {
+
+
+	private Task(String name, String plate, String staff, String id, int date, String jobnumber, ArrayList<Picture> pictures, ArrayList<Log>logs) {
 		this.name = name;
 		this.plate= plate;
 		this.staff = staff;
@@ -26,6 +27,14 @@ public class Task {
 
 		this.pictures = pictures;
 		this.logs = logs;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -56,15 +65,15 @@ public class Task {
 		return date;
 	}
 
-	public void setDate(int jobnumber) {
+	public void setDate(int date) {
 		this.date = date;
 	}
 
-	public int getJobnumber() {
+	public String getJobnumber() {
 		return jobnumber;
 	}
 
-	public void setJobnumber(int jobnumber) {
+	public void setJobnumber(String jobnumber) {
 		this.jobnumber = jobnumber;
 	}
 
