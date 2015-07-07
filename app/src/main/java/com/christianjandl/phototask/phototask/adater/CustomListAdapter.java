@@ -2,6 +2,7 @@ package com.christianjandl.phototask.phototask.adater;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,12 @@ import java.util.List;
 
 import com.christianjandl.phototask.R;
 import com.christianjandl.phototask.phototask.app.AppController;
+import com.christianjandl.phototask.phototask.model.Picture;
 import com.christianjandl.phototask.phototask.model.Task;
 
 public class CustomListAdapter extends BaseAdapter {
+
+	private static final String TAG = CustomListAdapter.class.getSimpleName();
 	private Activity activity;
 	private LayoutInflater inflater;
 	private List<Task> taskItems;
@@ -49,6 +53,8 @@ public class CustomListAdapter extends BaseAdapter {
 		if (inflater == null)
 			inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
 		if (convertView == null)
 			convertView = inflater.inflate(R.layout.list_row, null);
 
@@ -66,8 +72,16 @@ public class CustomListAdapter extends BaseAdapter {
 		// getting Task data for the row
 		Task m = taskItems.get(position);
 
-		// thumbnail image
-		//thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+		// thumbnail image Object:
+		Picture previewPic = new Picture();
+		previewPic = m.getPreviewpic();
+		String previewLink = new StringBuilder().append("http://dm141534.students.fhstp.ac.at/phototask_api/").append(previewPic.getThumb_link()).toString();
+		Log.d(TAG, previewLink);
+
+
+		thumbNail.setImageUrl(previewLink, imageLoader);
+
+
 		
 		// Name
 		name.setText(m.getName());
@@ -76,7 +90,7 @@ public class CustomListAdapter extends BaseAdapter {
 		plate.setText("Kennz: " + String.valueOf(m.getPlate()));
 		
 		// jobnumber
-		//jobnumber.setText(String.valueOf(m.getJobnumber()));
+		jobnumber.setText(String.valueOf(m.getJobnumber()));
 		
 		// release year
 		//staff.setText(String.valueOf(m.getDate()));

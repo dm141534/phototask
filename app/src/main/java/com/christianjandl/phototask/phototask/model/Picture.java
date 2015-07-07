@@ -1,5 +1,7 @@
 package com.christianjandl.phototask.phototask.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by christianjandl on 06.07.15.
 
@@ -14,12 +16,14 @@ package com.christianjandl.phototask.phototask.model;
 
  */
 
-public class Picture {
+public class Picture  {
 
  private String pic_link, thumb_link, made_by;
  private int ID, taskId, is_preview, pic_date;
 
  public Picture(){};
+
+
 
  private Picture(String pic_link, String thumb_link, String made_by, int ID, int taskId, int is_preview, int pic_date){
 
@@ -30,6 +34,14 @@ public class Picture {
   this.taskId = taskId;
   this.is_preview = is_preview;
   this.pic_date = pic_date;
+ }
+
+ public int getID() {
+  return ID;
+ }
+
+ public void setID(int ID) {
+  this.ID = ID;
  }
 
  public void setPic_link(String pic_link) {
@@ -75,6 +87,7 @@ public class Picture {
  public void setPic_date(int pic_date) {
   this.pic_date = pic_date;
  }
+
  public String getPic_link() {
   return pic_link;
 

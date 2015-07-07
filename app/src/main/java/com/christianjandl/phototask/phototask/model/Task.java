@@ -12,12 +12,15 @@ public class Task {
 	private ArrayList<Picture> pictures;
 	private ArrayList<Log> logs;
 
+	private Picture previewpic;
+
 	public Task() {
 	}
 
 
 
-	private Task(String name, String plate, String staff, String id, int date, String jobnumber, ArrayList<Picture> pictures, ArrayList<Log>logs) {
+
+	private Task(String name, String plate, String staff, String id, int date, String jobnumber, ArrayList<Picture> pictures, ArrayList<Log>logs, Picture previewpic) {
 		this.name = name;
 		this.plate= plate;
 		this.staff = staff;
@@ -27,6 +30,7 @@ public class Task {
 
 		this.pictures = pictures;
 		this.logs = logs;
+		this.previewpic = previewpic;
 	}
 
 	public String getId() {
@@ -95,5 +99,13 @@ public class Task {
 		this.logs = logs;
 	}
 
+
+	public Picture getPreviewpic() {
+		return previewpic;
+	}
+
+	public void setPreviewpic(Picture previewpic) {
+		this.previewpic = previewpic;
+	}
 
 }

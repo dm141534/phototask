@@ -35,6 +35,11 @@ public class MainActivity extends Activity {
 	private static final String url = "http://dm141534.students.fhstp.ac.at/phototask_api/api/tasks";
 	private ProgressDialog pDialog;
 	private List<Task> taskList = new ArrayList<Task>();
+	private ArrayList<Picture> picList = new ArrayList<Picture>();
+
+	public ArrayList<Picture> preview_pics = new ArrayList();
+
+ 	private List<Log> logList = new ArrayList<Log>();
 	private ListView listView;
 	private CustomListAdapter adapter;
 
@@ -67,7 +72,6 @@ public class MainActivity extends Activity {
 						// Parsing json
 						for (int i = 0; i < response.length(); i++) {
 							try {
-
 								JSONObject obj = response.getJSONObject(i);
 								Task task = new Task();
 
@@ -77,14 +81,42 @@ public class MainActivity extends Activity {
 								task.setJobnumber(obj.getString("jobnumber"));
 								task.setId(obj.getString("id"));
 								task.setDate(obj.getInt("date"));
-
-								// Genre is json array
+								// Pictures are in  json array
 								JSONArray pictureArray = obj.getJSONArray("pictures");
-								ArrayList<Picture>  pictures = new ArrayList<Picture>();
+								//JSONArray previewArray = obj.getJSONArray("preview_pic");
+
+								// new Object from Picture
+								Picture picture = new Picture();
+								Picture preview_pic = new Picture();
+
+
+
 								for (int j = 0; j < pictureArray.length(); j++) {
-									//pictures.add((String) pictureArray.get(j));
+
+									// get one object of the array
+									JSONObject jsonPic = pictureArray.getJSONObject(j);
+
+									picture.setID(jsonPic.getInt("ID"));
+									picture.setTaskId(jsonPic.getInt("taskId"));
+									picture.setPic_link(jsonPic.getString("pic_link"));
+									picture.setThumb_link(jsonPic.getString("thumb_link"));
+									picture.setMade_by(jsonPic.getString("made_by"));
+									picture.setIs_preview(jsonPic.getInt("is_preview"));
+									picture.setPic_date(jsonPic.getInt("pic_date"));
+
+									//Preview Picture
+
+									if(picture.getIs_preview() == 1){
+
+										task.setPreviewpic(picture);
+										Log.d(TAG, "Vorschaubild");
+										//preview_pics.add(preview_pic);
+									}
+
+									picList.add(j, picture);
 								}
-								task.setPictures(pictures);
+
+								task.setPictures(picList);
 
 								// adding task to tasks array
 								taskList.add(task);
@@ -92,7 +124,6 @@ public class MainActivity extends Activity {
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-
 						}
 
 						// notifying list adapter about data changes
