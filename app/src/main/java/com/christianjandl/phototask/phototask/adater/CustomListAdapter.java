@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -39,6 +41,9 @@ public class CustomListAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int location) {
+
+
+
 		return taskItems.get(location);
 	}
 
@@ -53,7 +58,6 @@ public class CustomListAdapter extends BaseAdapter {
 		if (inflater == null)
 			inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
 
 		if (convertView == null)
 			convertView = inflater.inflate(R.layout.list_row, null);
@@ -87,7 +91,7 @@ public class CustomListAdapter extends BaseAdapter {
 		name.setText(m.getName());
 		
 		// plate
-		plate.setText("Kennz: " + String.valueOf(m.getPlate()));
+		plate.setText("Kennzeichen: " + String.valueOf(m.getPlate()));
 		
 		// jobnumber
 		jobnumber.setText(String.valueOf(m.getJobnumber()));
@@ -97,5 +101,11 @@ public class CustomListAdapter extends BaseAdapter {
 
 		return convertView;
 	}
+	public void onItemClicked(AdapterView<?> parent, View view, int pos,long id) {
+		Toast.makeText(parent.getContext(),
+				"OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
+				Toast.LENGTH_SHORT).show();
+	}
+
 
 }

@@ -7,18 +7,24 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.christianjandl.phototask.R;
@@ -27,11 +33,13 @@ import com.christianjandl.phototask.phototask.app.AppController;
 import com.christianjandl.phototask.phototask.model.Picture;
 import com.christianjandl.phototask.phototask.model.Task;
 
-public class MainActivity extends Activity {
+import junit.framework.Test;
+
+public class MainActivity extends Activity  {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
 
-	// Movies json url
+	// tasks json url
 	private static final String url = "http://dm141534.students.fhstp.ac.at/phototask_api/api/tasks";
 	private ProgressDialog pDialog;
 	private List<Task> taskList = new ArrayList<Task>();
@@ -56,6 +64,8 @@ public class MainActivity extends Activity {
 		// Showing progress dialog before making http request
 		pDialog.setMessage("Loading...");
 		pDialog.show();
+
+
 
 		// changing action bar color
 	//	getActionBar().setBackgroundDrawable(
@@ -141,6 +151,27 @@ public class MainActivity extends Activity {
 
 		// Adding request to request queue
 		AppController.getInstance().addToRequestQueue(movieReq);
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+									int position, long id) {
+
+		long item = adapter.getItemId(position);
+
+				// When clicked, show a toast with the TextView text
+				//Toast.makeText(getApplicationContext(),"clicked on position" + position, Toast.LENGTH_LONG).show();
+
+					Task selecetedTask = taskList.get(position);
+
+	Toast.makeText(getApplicationContext(),"position" + selecetedTask, Toast.LENGTH_LONG).show();
+
+
+
+}
+		});
+
+
 	}
 
 	@Override
@@ -162,5 +193,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
 
 }
