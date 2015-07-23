@@ -4,5 +4,6 @@
     <string name="app_name">Phototask Jandl</string>
     <string name="action_settings">Einstellungen</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="title_activity_detail_view">DetailView</string>
+    <string name="detail_name">No Name</string>
 </resources>

@@ -2,6 +2,7 @@ package com.christianjandl.phototask.phototask;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import junit.framework.Test;
 public class MainActivity extends Activity  {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
+	public final static String  EXTRA_MESSAGE =  "com.christianjandl.phototask.MESSAGE" ;
 
 	// tasks json url
 	private static final String url = "http://dm141534.students.fhstp.ac.at/phototask_api/api/tasks";
@@ -151,24 +153,27 @@ public class MainActivity extends Activity  {
 
 		// Adding request to request queue
 		AppController.getInstance().addToRequestQueue(movieReq);
-
+		// On Click für Listview
 		listView.setOnItemClickListener(new OnItemClickListener() {
-@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-									int position, long id) {
 
-		long item = adapter.getItemId(position);
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				long item = adapter.getItemId(position);
 
 				// When clicked, show a toast with the TextView text
-				//Toast.makeText(getApplicationContext(),"clicked on position" + position, Toast.LENGTH_LONG).show();
+				Task selectedTask = taskList.get(position);
+				//Toast.makeText(getApplicationContext(),"position: " + selectedTask, Toast.LENGTH_LONG).show();
 
-					Task selecetedTask = taskList.get(position);
+				Toast.makeText(getApplicationContext(),"Ausgewählter Auftrag: " + selectedTask.getId(), Toast.LENGTH_LONG).show();
 
-	Toast.makeText(getApplicationContext(),"position" + selecetedTask, Toast.LENGTH_LONG).show();
+				Intent i = new Intent(getApplicationContext(), DetailView.class);
+				String selectedId = selectedTask.getId();
+
+				i.putExtra(EXTRA_MESSAGE,selectedId);
+				startActivity(i);
 
 
-
-}
+			}
 		});
 
 
